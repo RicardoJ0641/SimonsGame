@@ -42,7 +42,7 @@ html body {
   border-radius: 12rem 0 0 0;
   -moz-border-radius: 12rem 0 0 0;
   -webkit-border-radius: 12rem 0 0 0;
-  margin: 0 0 0 auto;
+  margin: 0 1.25% 0 auto;
 }
 
 #button-red {
@@ -54,7 +54,7 @@ html body {
    border-radius: 0 12rem 0 0;
    -moz-border-radius: 0 12rem 0 0;
    -webkit-border-radius: 0 12rem 0 0;
-   margin: 0 auto 0 0;
+   margin: 0 auto 0 1.25%;
 }
 
 
@@ -67,7 +67,7 @@ html body {
   border-radius: 0 0 0 12rem;
   -moz-border-radius: 0 0 0 12rem;
   -webkit-border-radius: 0 0 0 12rem;
-  margin: 2.5% 0 0 auto;
+  margin: 2.5% 1.25% 0 auto;
 }
 
 
@@ -80,7 +80,7 @@ html body {
   border-radius: 0 0 12rem 0;
   -moz-border-radius: 0 0 12rem 0;
   -webkit-border-radius: 0 0 12rem 0;
-  margin: 2.5% auto 0 0;
+  margin: 2.5% auto 0 1.25%;
 }
 
 .highlight-green {
@@ -103,3 +103,114 @@ html body {
   box-shadow: 0 0 20px white;
 }
 
+/* Updates the game text and game button sizes for smaller screens*/
+@media(max-width: 500px) {
+
+  /*Game text */
+
+  .round-text {
+    font-size: 1.8rem;
+  }
+
+  .info-text {
+    font-size: 1rem;
+  }
+
+
+    /*Game buttons */
+
+  #button-green {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 9rem 0 0 0;
+    -moz-border-radius: 9rem 0 0 0;
+    -webkit-border-radius: 9rem 0 0 0;
+    margin: 0 1% 0 auto;
+  }
+
+  #button-red {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0 9rem 0 0;
+    -moz-border-radius: 0 9rem 0 0;
+    -webkit-border-radius: 0 9rem 0 0;
+    margin: 0 auto 0 1%;
+  }
+
+
+  #button-yellow {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0 0 0 9rem;
+    -moz-border-radius: 0 0 0 9rem;
+    -webkit-border-radius: 0 0 0 9rem;
+    margin: 1% 1% 0 auto;
+  }
+
+
+  #button-blue {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0 0 9rem 0;
+    -moz-border-radius: 0 0 9rem 0;
+    -webkit-border-radius: 0 0 9rem 0;
+    margin: 1% auto 0 1%;
+  }
+
+}
+
+/* Updates the game text and game button sizes for smaller screens*/
+@media(max-width: 360px) {
+
+  /*Game text */
+
+  .round-text {
+    font-size: 1.4rem;
+  }
+
+  .info-text {
+    font-size: 1rem;
+  }
+
+
+    /*Game buttons */
+
+  #button-green {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 6rem 0 0 0;
+    -moz-border-radius: 6rem 0 0 0;
+    -webkit-border-radius: 6rem 0 0 0;
+    margin: 0 1% 0 auto;
+  }
+
+  #button-red {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 0 6rem 0 0;
+    -moz-border-radius: 0 6rem 0 0;
+    -webkit-border-radius: 0 6rem 0 0;
+    margin: 0 auto 0 1%;
+  }
+
+
+  #button-yellow {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 0 0 0 6rem;
+    -moz-border-radius: 0 0 0 6rem;
+    -webkit-border-radius: 0 0 0 6rem;
+    margin: 1% 1% 0 auto;
+  }
+
+
+  #button-blue {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 0 0 6rem 0;
+    -moz-border-radius: 0 0 6rem 0;
+    -webkit-border-radius: 0 0 6rem 0;
+    margin: 1% auto 0 1%;
+  }
+
+}
