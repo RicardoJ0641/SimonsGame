@@ -1,6 +1,17 @@
+html {
+  min-height:100vh;
+  height:100%;
+}
+
 html body {
   text-align: center;
   background-color: #231E23;
+  min-height:100vh;
+  height:100%;
+}
+
+.container-fluid {
+  height: 80vh;
 }
 
 /*Game text */
@@ -101,6 +112,23 @@ html body {
 .highlight-blue {
   background: blue;
   box-shadow: 0 0 20px white;
+}
+
+#footer {
+  background-color: #221f22;
+  width: 100%;
+  margin-top: 5%;
+  position: absolute;
+
+}
+.attribution-link {
+  font-size: .8rem;
+  color: #deeeeade;
+}
+
+.attribution-link:hover {
+  color: #39A6A3;
+  text-decoration: normal;
 }
 
 /* Updates the game text and game button sizes for smaller screens*/

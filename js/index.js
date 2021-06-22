@@ -40,6 +40,45 @@ class SimonsGame {
     }
 
     /*
+    * Plays the game over sound
+    * @return none
+    */
+    #playGameOverSound() {
+
+        let audio; 
+
+        //randomly selects one of 4 game over sounds
+        let soundPicker = Math.floor((Math.random() * 4) + 1);
+
+        switch(soundPicker) {
+            case 1:
+                audio = new Audio('resources\\sounds\\gameover sounds\\zapsplat_multimedia_game_error_tone_001_24919.mp3');
+                audio.play();
+                break;
+            case 2:
+                audio = new Audio('resources\\sounds\\gameover sounds\\zapsplat_multimedia_game_error_tone_002_24920.mp3');
+                audio.play();
+                break;
+            case 3:
+                audio = new Audio('resources\\sounds\\gameover sounds\\zapsplat_multimedia_game_error_tone_003_24921.mp3');
+                audio.play();
+                break;
+            case 4:
+                audio = new Audio('resources\\sounds\\gameover sounds\\zapsplat_multimedia_game_error_tone_004_24922.mp3');
+                audio.play();
+        }
+    }
+
+    /*
+    * Plays the victory sound
+    * @return none
+    */
+    #playVictorySound() {
+        let audio = new Audio('resources\\sounds\\victory sounds\\zapsplat_cartoon_bubble_pop_001_40315.mp3');
+        audio.play();
+    }
+
+    /*
     * Resets the list that holds the order in which the user has to click the buttons
     * @return {string} id of the next button the user must click 
     */
@@ -89,8 +128,6 @@ class SimonsGame {
     #addButtonToButtonPrompts() {
         let buttonId = this.#getNextButtonId();
         this.#buttonPrompts.push(buttonId);
-
-        // console.log("button id is added: " + this.#buttonPrompts[0])
     }
 
     
@@ -122,8 +159,6 @@ class SimonsGame {
             setTimeout( function() {
 
                 buttonId = self.#buttonPrompts[x];
-
-                // console.log("id is" + buttonId);
     
                 // highlights the button and plays its sound jingle
                 switch (buttonId) {
@@ -133,7 +168,7 @@ class SimonsGame {
                         //highlights the button
                         $("#button-green").addClass("highlight-green");
     
-                        audio = new Audio('resources/sounds/green.mp3');
+                        audio = new Audio('resources\\sounds\\button sounds\\green button\\zapsplat_cartoon_fast_descend_delicate_glassy_001_64292.mp3');
                         audio.play();
     
                         //un-highlights the button after some time
@@ -148,7 +183,7 @@ class SimonsGame {
                         //highlights the button
                         $("#button-red").addClass("highlight-red");
     
-                        audio = new Audio('resources/sounds/red.mp3');
+                        audio = new Audio('resources\\sounds\\button sounds\\red button\\zapsplat_cartoon_fast_descend_delicate_glassy_002_64207.mp3');
                         audio.play();
     
                         //un-highlights the button after some time
@@ -163,7 +198,7 @@ class SimonsGame {
                         //highlights the button
                         $("#button-yellow").addClass("highlight-yellow");
     
-                        audio = new Audio('resources/sounds/yellow.mp3');
+                        audio = new Audio('resources\\sounds\\button sounds\\yellow button\\zapsplat_cartoon_knocking_high_pitched_delicate_glass_002_64211.mp3');
                         audio.play();
     
                         //un-highlights the button after some time
@@ -178,7 +213,7 @@ class SimonsGame {
                         //highlights the button
                         $("#button-blue").addClass("highlight-blue");
     
-                        audio = new Audio('resources/sounds/blue.mp3');
+                        audio = new Audio('resources\\sounds\\button sounds\\blue button\\zapsplat_cartoon_bubble_pop_002_40274.mp3');
                         audio.play();
     
                         //un-highlights the button after some time
@@ -202,28 +237,38 @@ class SimonsGame {
     /*
     * Displays animation that all button prompts were successfully entered
     */
-    #displayCorrectButtonsClicked() {
+    #displayVictory() {
 
-        //makes all 3 buttons flash 3 times
-        
-        for (let x = 0; x < 3; x++) {
 
-            //adds the effect
-            $("#button-green").addClass("highlight-green");
-            $("#button-red").addClass("highlight-red");
-            $("#button-yellow").addClass("highlight-yellow");
-            $("#button-blue").addClass("highlight-blue");
+        let x = 0;
 
-            let delayInMilliseconds = 300; //timeout delay
+        //makes all 4 buttons flash a specified amount of times
+        (function flashButtons(x) {
+            setTimeout( function() {
 
-            //removes the effect 
-            setTimeout(function() {
-                $("#button-green").removeClass("highlight-green");
-                $("#button-red").removeClass("highlight-red");
-                $("#button-yellow").removeClass("highlight-yellow");
-                $("#button-blue").removeClass("highlight-blue");
-            }, delayInMilliseconds);
-        }
+                if (x % 2 == 0) {
+                    //adds the effect
+                    $("#button-green").addClass("highlight-green");
+                    $("#button-red").addClass("highlight-red");
+                    $("#button-yellow").addClass("highlight-yellow");
+                    $("#button-blue").addClass("highlight-blue");
+                }
+                else {
+                    //removes the effect
+                    $("#button-green").removeClass("highlight-green");
+                    $("#button-red").removeClass("highlight-red");
+                    $("#button-yellow").removeClass("highlight-yellow");
+                    $("#button-blue").removeClass("highlight-blue");
+                }
+
+                if (x < 1) {
+                    x++;
+                    flashButtons(x);
+                }
+
+            }, 150);
+
+        })(x);
     }
 
     /*
@@ -266,6 +311,8 @@ class SimonsGame {
             //removes click event from game buttons
             self.#setButtonsClickOff();
 
+            self.#playGameOverSound();
+
             self.#displayWrongButtonClicked();
 
             // waits before restarting the game
@@ -282,8 +329,6 @@ class SimonsGame {
         }
 
         else {
-            
-            console.log("pressed buttons is " + self.#pressedButtons + " button prompts is "  + self.#buttonPrompts);
 
             // user has inputted all the correct buttons
             if (self.#pressedButtons.join(',') === self.#buttonPrompts.join(',')) {
@@ -294,7 +339,9 @@ class SimonsGame {
                 //removes click event from game buttons
                 self.#setButtonsClickOff();
 
-                self.#displayCorrectButtonsClicked();
+                self.#playVictorySound();
+
+                self.#displayVictory();
 
                 // waits before running the next round
                 let delayInMilliseconds = 1000; //timeout delay
@@ -326,7 +373,7 @@ class SimonsGame {
             //highlights the button
             $("#button-green").addClass("highlight-green");
 
-            let audio = new Audio('resources/sounds/green.mp3');
+            let audio = new Audio('resources\\sounds\\button sounds\\green button\\zapsplat_cartoon_fast_descend_delicate_glassy_001_64292.mp3');
             audio.play();
 
             let delayInMilliseconds = 300; //timeout delay
@@ -349,7 +396,7 @@ class SimonsGame {
             //highlights the button
             $("#button-red").addClass("highlight-red");
 
-            let audio = new Audio('resources/sounds/red.mp3');
+            let audio = new Audio('resources\\sounds\\button sounds\\red button\\zapsplat_cartoon_fast_descend_delicate_glassy_002_64207.mp3');
             audio.play();
 
             let delayInMilliseconds = 300; //timeout delay
@@ -372,7 +419,7 @@ class SimonsGame {
             //highlights the button
             $("#button-yellow").addClass("highlight-yellow");
 
-            let audio = new Audio('resources/sounds/yellow.mp3');
+            let audio = new Audio('resources\\sounds\\button sounds\\yellow button\\zapsplat_cartoon_knocking_high_pitched_delicate_glass_002_64211.mp3');
             audio.play();
 
             let delayInMilliseconds = 300; //timeout delay
@@ -395,7 +442,7 @@ class SimonsGame {
             //highlights the button
             $("#button-blue").addClass("highlight-blue");
 
-            let audio = new Audio('resources/sounds/blue.mp3');
+            let audio = new Audio('resources\\sounds\\button sounds\\blue button\\zapsplat_cartoon_bubble_pop_002_40274.mp3');
             audio.play();
 
             let delayInMilliseconds = 300; //timeout delay
@@ -428,9 +475,6 @@ class SimonsGame {
     playGame() {
 
         console.log("NEW ROUND HAS STARTED");
-        console.log("current buttom prompts is " + this.#buttonPrompts);
-        console.log("pressed buttons is " + this.#pressedButtons);
-        console.log("current Button Prompt is " + this.#currentButtonPrompt);
 
         //updates the game text prompt the user sees
         this.#updateRoundText();
