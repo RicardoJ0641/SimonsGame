@@ -38,7 +38,7 @@ html body {
 
 
 .game-over {
-  background-color: red;
+  background-color: rgb(73, 43, 43);
   opacity: 0.8;
 }
 
