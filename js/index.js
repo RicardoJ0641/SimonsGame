@@ -12,10 +12,14 @@ class SimonsGame {
     //current button prompt the user is entering
     #currentButtonPrompt;
 
+    //delay it takes for each button to be displayed when starting a round
+    #buttonDisplayDelayInMilliseconds;
+
     constructor() {
         this.#buttonPrompts = [];
         this.#pressedButtons = [];
         this.#currentButtonPrompt = 0;
+        this.#buttonDisplayDelayInMilliseconds = 600;
     }
 
     /*
@@ -62,11 +66,20 @@ class SimonsGame {
     }
 
     /*
-    * Updates the game text to show the current round number 
+    * Updates the game round text to show the current round number 
     * @return none
     */
-    #updateGameText() {
+    #updateRoundText() {
         $(".round-text").text("Round " + (this.#buttonPrompts.length + 1) + "!");
+    }
+
+    /*
+    * Updates the info text to show information about the game 
+    * @param {string} info Information about the current state of the game
+    * @return none
+    */
+    #updateInfoText(info) {
+        $(".info-text").text(info);
     }
 
     /*
@@ -98,7 +111,7 @@ class SimonsGame {
     #displayButtonPrompts() {
         
         let audio;
-        let delayInMilliseconds;
+        let delayInMilliseconds = this.#buttonDisplayDelayInMilliseconds;
         let buttonId;
         let self = this;
         let x = 0;
@@ -123,12 +136,10 @@ class SimonsGame {
                         audio = new Audio('resources/sounds/green.mp3');
                         audio.play();
     
-                        delayInMilliseconds = 600; //timeout delay
-    
                         //un-highlights the button after some time
                         setTimeout(function() {
                             $("#button-green").removeClass("highlight-green");
-                        }, delayInMilliseconds);
+                        }, delayInMilliseconds  - 50);
     
                         break;
     
@@ -140,12 +151,10 @@ class SimonsGame {
                         audio = new Audio('resources/sounds/red.mp3');
                         audio.play();
     
-                        delayInMilliseconds = 600; //timeout delay
-    
                         //un-highlights the button after some time
                         setTimeout(function() {
                             $("#button-red").removeClass("highlight-red");
-                            }, delayInMilliseconds);
+                            }, delayInMilliseconds  - 50);
     
                         break;
                         
@@ -157,12 +166,10 @@ class SimonsGame {
                         audio = new Audio('resources/sounds/yellow.mp3');
                         audio.play();
     
-                        delayInMilliseconds = 600; //timeout delay
-    
                         //un-highlights the button after some time
                         setTimeout(function() {
                             $("#button-yellow").removeClass("highlight-yellow");
-                            }, delayInMilliseconds);
+                            }, delayInMilliseconds  - 50);
     
                         break;  
     
@@ -174,12 +181,10 @@ class SimonsGame {
                         audio = new Audio('resources/sounds/blue.mp3');
                         audio.play();
     
-                        delayInMilliseconds = 600; //timeout delay
-    
                         //un-highlights the button after some time
                         setTimeout(function() {
                             $("#button-blue").removeClass("highlight-blue");
-                            }, delayInMilliseconds);                    
+                            }, delayInMilliseconds - 50);                    
                 }
     
 
@@ -188,7 +193,7 @@ class SimonsGame {
                     displayEachButton(audio, delayInMilliseconds, buttonId, self, x);
                 }
 
-            }, delayInMilliseconds + 100);
+            }, delayInMilliseconds);
 
         })(audio, delayInMilliseconds, buttonId, self, x);
 
@@ -227,7 +232,7 @@ class SimonsGame {
     #displayWrongButtonClicked() {
         
         $("html body").addClass("game-over")
-        let delayInMilliseconds = 500; //timeout delay
+        let delayInMilliseconds = 600; //timeout delay
 
         //removes the game over color
         setTimeout(function() {
@@ -256,8 +261,7 @@ class SimonsGame {
         if (self.#pressedButtons[index] != self.#buttonPrompts[index]) {
 
             console.log("WRONG INPUT");
-            console.log("pressed button is " + this.#pressedButtons[index]);
-            console.log("button prompt is " + this.#buttonPrompts[index]);
+            this.#updateInfoText("Wrong!");
 
             //removes click event from game buttons
             self.#setButtonsClickOff();
@@ -285,6 +289,7 @@ class SimonsGame {
             if (self.#pressedButtons.join(',') === self.#buttonPrompts.join(',')) {
 
                 console.log("CORRECT INPUT");
+                this.#updateInfoText("Correct!");
 
                 //removes click event from game buttons
                 self.#setButtonsClickOff();
@@ -428,7 +433,8 @@ class SimonsGame {
         console.log("current Button Prompt is " + this.#currentButtonPrompt);
 
         //updates the game text prompt the user sees
-        this.#updateGameText();
+        this.#updateRoundText();
+        this.#updateInfoText("Get Ready!");
 
         //adds a new button prompt to the list of buttons
         this.#addButtonToButtonPrompts();
@@ -436,8 +442,15 @@ class SimonsGame {
         //replays buttons prompt list
         this.#displayButtonPrompts();
 
-        //gets user input and decides whether it's right or not as the user selects the buttons
-        this.#readyUserInput();
+        let self = this;
+
+        setTimeout(function() {
+          
+            //gets user input and validates it
+            self.#updateInfoText("Click the Buttons!");
+            self.#readyUserInput();
+
+        }, this.#buttonDisplayDelayInMilliseconds * (this.#buttonPrompts.length + 1))
     }
 }
 
