@@ -444,7 +444,7 @@ class SimonsGame {
 let gameStarted = false;
 
 //starts the game
-$(document).keypress(function() {
+$(document).on("click keypress", function() {
 
     if (!gameStarted) {
         gameStarted = true;
