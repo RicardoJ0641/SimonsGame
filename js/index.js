@@ -66,7 +66,7 @@ class SimonsGame {
     * @return none
     */
     #updateGameText() {
-        $(".game-text").text("Round " + (this.#buttonPrompts.length + 1) + "!");
+        $(".round-text").text("Round " + (this.#buttonPrompts.length + 1) + "!");
     }
 
     /*
@@ -77,7 +77,19 @@ class SimonsGame {
         let buttonId = this.#getNextButtonId();
         this.#buttonPrompts.push(buttonId);
 
-        console.log("button id is added: " + this.#buttonPrompts[0])
+        // console.log("button id is added: " + this.#buttonPrompts[0])
+    }
+
+    
+    /*
+    * Removes the click events from the game buttons
+    * @return none
+    */
+    #setButtonsClickOff() {
+        $("#button-green").unbind();
+        $("#button-red").unbind();
+        $("#button-yellow").unbind();
+        $("#button-blue").unbind();
     }
 
     /*
@@ -98,7 +110,7 @@ class SimonsGame {
 
                 buttonId = self.#buttonPrompts[x];
 
-                console.log("id is" + buttonId);
+                // console.log("id is" + buttonId);
     
                 // highlights the button and plays its sound jingle
                 switch (buttonId) {
@@ -243,11 +255,12 @@ class SimonsGame {
         // last entered button is incorrect
         if (self.#pressedButtons[index] != self.#buttonPrompts[index]) {
 
+            console.log("WRONG INPUT");
             console.log("pressed button is " + this.#pressedButtons[index]);
             console.log("button prompt is " + this.#buttonPrompts[index]);
 
             //removes click event from game buttons
-            $( ".game-button" ).off( "click", "**" );
+            self.#setButtonsClickOff();
 
             self.#displayWrongButtonClicked();
 
@@ -269,12 +282,12 @@ class SimonsGame {
             console.log("pressed buttons is " + self.#pressedButtons + " button prompts is "  + self.#buttonPrompts);
 
             // user has inputted all the correct buttons
-            if (self.#pressedButtons === self.#buttonPrompts) {
+            if (self.#pressedButtons.join(',') === self.#buttonPrompts.join(',')) {
 
-                console.log("correct!");
+                console.log("CORRECT INPUT");
 
                 //removes click event from game buttons
-                $(".game-button").off( "click");
+                self.#setButtonsClickOff();
 
                 self.#displayCorrectButtonsClicked();
 
@@ -409,6 +422,11 @@ class SimonsGame {
     */
     playGame() {
 
+        console.log("NEW ROUND HAS STARTED");
+        console.log("current buttom prompts is " + this.#buttonPrompts);
+        console.log("pressed buttons is " + this.#pressedButtons);
+        console.log("current Button Prompt is " + this.#currentButtonPrompt);
+
         //updates the game text prompt the user sees
         this.#updateGameText();
 
@@ -431,7 +449,7 @@ $(document).keypress(function() {
     if (!gameStarted) {
         gameStarted = true;
 
-        $(".game-text").text("Get ready!");
+        $(".round-text").text("Get ready!");
         let simonsGame = new SimonsGame();
         simonsGame.playGame();
 
