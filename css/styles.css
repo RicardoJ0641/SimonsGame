@@ -1,0 +1,93 @@
+html body {
+  text-align: center;
+  background-color: #231E23;
+}
+
+/*Game text */
+
+.game-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  margin:  5%;
+  margin-bottom: 3%;
+  color: #DEEEEA;
+  text-align: center;
+}
+
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+/*Game buttons */
+
+#button-green {
+  width: 14rem;
+   height: 14rem;
+  background: green;
+  border: solid #202221d5;
+  border-width: .5rem;
+  border-radius: 13rem 0 0 0;
+  -moz-border-radius: 13rem 0 0 0;
+  -webkit-border-radius: 13rem 0 0 0;
+  margin: 0 0 0 auto;
+}
+
+#button-red {
+   width: 14rem;
+   height: 14rem;
+   background: red;
+   border: solid #202221d5;
+   border-width: .5rem;
+   border-radius: 0 13rem 0 0;
+   -moz-border-radius: 0 13rem 0 0;
+   -webkit-border-radius: 0 13rem 0 0;
+   margin: 0 auto 0 0;
+}
+
+
+#button-yellow {
+  width: 14rem;
+   height: 14rem;
+  background: yellow;
+  border: solid #202221d5;
+  border-width: .5rem;
+  border-radius: 0 0 0 13rem;
+  -moz-border-radius: 0 0 0 13rem;
+  -webkit-border-radius: 0 0 0 13rem;
+  margin: 2.5% 0 0 auto;
+}
+
+
+#button-blue {
+  width: 14rem;
+  height: 14rem;
+  background: cyan;
+  border: solid #202221d5;
+  border-width: .5rem;
+  border-radius: 0 0 13rem 0;
+  -moz-border-radius: 0 0 13rem 0;
+  -webkit-border-radius: 0 0 13rem 0;
+  margin: 2.5% auto 0 0;
+}
+
+.highlight-green {
+  background: white;
+  box-shadow: 0 0 20px white;
+}
+
+.highlight-red {
+  background: #f57373;
+  box-shadow: 0 0 20px white;
+}
+
+.highlight-yellow {
+  background: orange;
+  box-shadow: 0 0 20px white;
+}
+
+.highlight-blue {
+  background: blue;
+  box-shadow: 0 0 20px white;
+}
+
